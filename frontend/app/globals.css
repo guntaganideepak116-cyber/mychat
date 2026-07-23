@@ -3,6 +3,81 @@
 @tailwind utilities;
 
 /* ─────────────────────────────────────────────────────────
+   EXPLICIT BRAND UTILITY CLASSES
+   These are defined here (not just in tailwind.config) to
+   guarantee Tailwind's JIT includes them in the compiled CSS.
+───────────────────────────────────────────────────────── */
+@layer utilities {
+  /* Background gradient */
+  .bg-brand-gradient {
+    background: linear-gradient(135deg, #2E6FF6 0%, #9333EA 100%);
+  }
+  .bg-brand-gradient-subtle {
+    background: linear-gradient(135deg, rgba(46,111,246,0.15) 0%, rgba(147,51,234,0.15) 100%);
+  }
+
+  /* Gradient text */
+  .text-brand-gradient {
+    background: linear-gradient(135deg, #2E6FF6 0%, #9333EA 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+  .text-gradient {
+    background: linear-gradient(135deg, #2E6FF6 0%, #9333EA 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  /* Solid brand colors */
+  .bg-brand-blue { background-color: #2E6FF6; }
+  .bg-brand-purple { background-color: #9333EA; }
+  .text-brand-blue { color: #2E6FF6; }
+  .text-brand-purple { color: #9333EA; }
+  .border-brand-blue { border-color: #2E6FF6; }
+  .border-brand-purple { border-color: #9333EA; }
+  .ring-brand-blue { --tw-ring-color: #2E6FF6; }
+
+  /* Brand blue opacity variants */
+  .bg-brand-blue\/10 { background-color: rgba(46,111,246,0.10); }
+  .bg-brand-blue\/12 { background-color: rgba(46,111,246,0.12); }
+  .bg-brand-blue\/15 { background-color: rgba(46,111,246,0.15); }
+  .bg-brand-blue\/20 { background-color: rgba(46,111,246,0.20); }
+  .bg-brand-blue\/8  { background-color: rgba(46,111,246,0.08); }
+  .text-brand-blue\/10 { color: rgba(46,111,246,0.10); }
+  .border-brand-blue\/30 { border-color: rgba(46,111,246,0.30); }
+  .border-brand-blue\/40 { border-color: rgba(46,111,246,0.40); }
+  .border-brand-blue\/25 { border-color: rgba(46,111,246,0.25); }
+  .shadow-brand-blue\/10 { --tw-shadow-color: rgba(46,111,246,0.10); }
+  .shadow-brand-blue\/20 { --tw-shadow-color: rgba(46,111,246,0.20); }
+  .shadow-brand-blue\/25 { --tw-shadow-color: rgba(46,111,246,0.25); }
+  .shadow-brand-blue\/30 { --tw-shadow-color: rgba(46,111,246,0.30); }
+
+  /* Brand purple opacity variants */
+  .bg-brand-purple\/30 { background-color: rgba(147,51,234,0.30); }
+  .from-brand-blue\/15 { --tw-gradient-from: rgba(46,111,246,0.15); }
+  .via-brand-purple\/10 { --tw-gradient-via: rgba(147,51,234,0.10); }
+
+  /* Dot grid pattern */
+  .dot-grid {
+    background-image: radial-gradient(rgba(46, 111, 246, 0.12) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  /* Grid background pattern */
+  .grid-bg {
+    background-image:
+      linear-gradient(rgba(46, 111, 246, 0.05) 1px, transparent 1px),
+      linear-gradient(to right, rgba(46, 111, 246, 0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+}
+
+
+/* ─────────────────────────────────────────────────────────
    BRAND COLOR SYSTEM
    Primary gradient: #2E6FF6 → #9333EA (135deg)
 ───────────────────────────────────────────────────────── */
