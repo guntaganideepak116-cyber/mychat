@@ -6,6 +6,7 @@ import { clerkAuthMiddleware } from './middleware/auth';
 import { errorHandler } from './middleware/errorHandler';
 import conversationsRouter from './routes/conversations';
 import messagesRouter from './routes/messages';
+import chatRouter from './routes/chat';
 import { AuthenticatedRequest } from './types';
 
 dotenv.config();
@@ -67,6 +68,7 @@ const messageRateLimiter = rateLimit({
 });
 
 // Apply rate limiter specifically to message posting routes
+app.use('/api/chat', messageRateLimiter);
 app.use('/api/conversations/:id/messages', messageRateLimiter);
 app.use('/api/messages', messageRateLimiter);
 
@@ -79,6 +81,7 @@ app.get('/health', (_req, res) => {
   });
 });
 
+app.use('/api/chat', chatRouter);
 app.use('/api/conversations', conversationsRouter);
 app.use('/api/messages', messagesRouter);
 
