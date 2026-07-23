@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useAuth } from '@clerk/nextjs';
 import {
   Zap,
   History,
@@ -19,11 +21,27 @@ import { MyChatLogo } from '@/components/ui/MyChatLogo';
 
 export default function LandingPage() {
   const [isLightMode, setIsLightMode] = useState(false);
+  const { isSignedIn, isLoaded } = useAuth();
+  const router = useRouter();
+
+  // Auto-redirect signed in users directly to /chat
+  useEffect(() => {
+    if (isLoaded && isSignedIn) {
+      router.replace('/chat');
+    }
+  }, [isLoaded, isSignedIn, router]);
 
   useEffect(() => {
-    // Check initial html class or system preference
-    const isLight = document.documentElement.classList.contains('light');
+    const savedTheme = localStorage.getItem('mychat_theme');
+    const isLight = savedTheme === 'light' || document.documentElement.classList.contains('light');
     setIsLightMode(isLight);
+    if (isLight) {
+      document.documentElement.classList.add('light');
+      document.documentElement.classList.remove('dark');
+    } else {
+      document.documentElement.classList.remove('light');
+      document.documentElement.classList.add('dark');
+    }
   }, []);
 
   const toggleTheme = () => {
@@ -32,9 +50,11 @@ export default function LandingPage() {
     if (nextLight) {
       document.documentElement.classList.add('light');
       document.documentElement.classList.remove('dark');
+      localStorage.setItem('mychat_theme', 'light');
     } else {
       document.documentElement.classList.remove('light');
       document.documentElement.classList.add('dark');
+      localStorage.setItem('mychat_theme', 'dark');
     }
   };
 

@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { Menu } from 'lucide-react';
+import { Menu, Sun, Moon } from 'lucide-react';
 import { MessageBubble } from './MessageBubble';
 import { ChatInput } from './ChatInput';
 import { MyChatLogo } from '@/components/ui/MyChatLogo';
@@ -26,9 +26,38 @@ export function ChatWindow({
   updateMessage,
 }: Props) {
   const [input, setInput] = useState('');
+  const [isLightMode, setIsLightMode] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const { sendMessage, stop, streaming, thinking } = useSendMessage();
+
+  useEffect(() => {
+    // Sync theme from document or localStorage
+    const savedTheme = localStorage.getItem('mychat_theme');
+    const isLight = savedTheme === 'light' || document.documentElement.classList.contains('light');
+    setIsLightMode(isLight);
+    if (isLight) {
+      document.documentElement.classList.add('light');
+      document.documentElement.classList.remove('dark');
+    } else {
+      document.documentElement.classList.remove('light');
+      document.documentElement.classList.add('dark');
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    const nextLight = !isLightMode;
+    setIsLightMode(nextLight);
+    if (nextLight) {
+      document.documentElement.classList.add('light');
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('mychat_theme', 'light');
+    } else {
+      document.documentElement.classList.remove('light');
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('mychat_theme', 'dark');
+    }
+  };
 
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: 'smooth' });
@@ -85,12 +114,12 @@ export function ChatWindow({
   const showEmpty = !conversation || messages.length === 0;
 
   return (
-    <section className="flex flex-1 flex-col min-w-0 h-full bg-background">
+    <section className="flex flex-1 flex-col min-w-0 h-full bg-background transition-colors duration-200">
       {/* Top bar */}
       <div className="flex items-center gap-3 h-14 px-3 sm:px-6 border-b border-border bg-background/70 backdrop-blur">
         <button
           onClick={onOpenSidebar}
-          className="md:hidden p-1.5 rounded text-muted-foreground hover:text-foreground hover:bg-muted"
+          className="md:hidden p-1.5 rounded text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
           aria-label="Open sidebar"
         >
           <Menu className="h-5 w-5" />
@@ -103,11 +132,24 @@ export function ChatWindow({
             Encrypted channel · Live
           </div>
         </div>
-        <div className="hidden sm:flex items-center gap-2 rounded-md border border-border bg-surface px-2.5 py-1">
-          <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
-          <span className="text-[10px] uppercase tracking-widest text-muted-foreground">
-            Model: MyChat-Core
-          </span>
+
+        <div className="flex items-center gap-2">
+          {/* Theme Toggle Button */}
+          <button
+            onClick={toggleTheme}
+            className="p-2 rounded-lg border border-border/60 bg-surface hover:bg-muted text-muted-foreground hover:text-foreground transition-all"
+            aria-label="Toggle theme"
+            title="Toggle Light / Dark Mode"
+          >
+            {isLightMode ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
+          </button>
+
+          <div className="hidden sm:flex items-center gap-2 rounded-md border border-border bg-surface px-2.5 py-1">
+            <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
+            <span className="text-[10px] uppercase tracking-widest text-muted-foreground">
+              Model: MyChat-Core
+            </span>
+          </div>
         </div>
       </div>
 

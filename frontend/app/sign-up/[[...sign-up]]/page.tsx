@@ -31,6 +31,12 @@ export default function SignUpPage() {
           routing="hash"
           signInUrl="/sign-in"
           forceRedirectUrl="/chat"
+          fallbackRedirectUrl="/chat"
+          appearance={{
+            elements: {
+              devModeBadge: 'hidden',
+            },
+          }}
         />
       </div>
     </div>
