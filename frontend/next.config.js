@@ -1,16 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Cloudflare Pages SSR compatibility
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: '**',
+        hostname: '*',
       },
     ],
   },
-
-  // Strict mode for better React practices
   reactStrictMode: true,
 };
 
