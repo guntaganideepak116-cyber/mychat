@@ -1,23 +1,19 @@
 import OpenAI from 'openai';
 
 /**
- * OpenRouter Client initialized using the OpenAI-compatible SDK.
- * Reads OPENROUTER_API_KEY and OPENROUTER_MODEL from environment variables.
+ * Groq AI Client initialized using the OpenAI-compatible SDK.
+ * Reads GROQ_API_KEY and GROQ_MODEL from environment variables.
  */
-const apiKey = process.env.OPENROUTER_API_KEY || '';
+const apiKey = process.env.GROQ_API_KEY || process.env.OPENROUTER_API_KEY || '';
 
 if (!apiKey) {
-  console.warn('[OpenRouter] Warning: OPENROUTER_API_KEY is not set in environment variables.');
+  console.warn('[Groq] Warning: GROQ_API_KEY is not set in environment variables.');
 }
 
 export const openrouter = new OpenAI({
-  baseURL: 'https://openrouter.ai/api/v1',
+  baseURL: 'https://api.groq.com/openai/v1',
   apiKey: apiKey,
-  defaultHeaders: {
-    'HTTP-Referer': process.env.FRONTEND_URL || 'https://mychat.pages.dev',
-    'X-Title': 'MyChat AI Assistant',
-  },
 });
 
 export const OPENROUTER_MODEL =
-  process.env.OPENROUTER_MODEL || 'google/gemma-4-31b-it:free';
+  process.env.GROQ_MODEL || process.env.OPENROUTER_MODEL || 'llama-3.1-8b-instant';
