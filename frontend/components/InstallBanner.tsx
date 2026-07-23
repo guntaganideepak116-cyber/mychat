@@ -209,11 +209,11 @@ export function InstallBanner() {
                   </li>
                   <li className="flex items-center gap-3 text-sm text-muted-foreground">
                     <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-blue/15 text-brand-blue text-xs font-bold">2</span>
-                    Scroll down and tap <strong className="text-foreground ml-1">"Add to Home Screen"</strong>
+                    Scroll down and tap <strong className="text-foreground ml-1">&ldquo;Add to Home Screen&rdquo;</strong>
                   </li>
                   <li className="flex items-center gap-3 text-sm text-muted-foreground">
                     <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-blue/15 text-brand-blue text-xs font-bold">3</span>
-                    Tap <strong className="text-foreground ml-1">"Add"</strong> to confirm
+                    Tap <strong className="text-foreground ml-1">&ldquo;Add&rdquo;</strong> to confirm
                   </li>
                 </ol>
               </div>
@@ -235,7 +235,7 @@ export function InstallBanner() {
                 ) : (
                   <>
                     <Download className="h-5 w-5" />
-                    Install App — It's Free
+                    Install App &mdash; It&apos;s Free
                   </>
                 )}
               </button>
