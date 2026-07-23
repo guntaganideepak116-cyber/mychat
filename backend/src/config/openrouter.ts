@@ -20,4 +20,4 @@ export const openrouter = new OpenAI({
 });
 
 export const OPENROUTER_MODEL =
-  process.env.OPENROUTER_MODEL || 'anthropic/claude-3.5-sonnet';
+  process.env.OPENROUTER_MODEL || 'google/gemma-4-31b-it:free';
