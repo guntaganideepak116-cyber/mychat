@@ -14,18 +14,23 @@ export function generateStaticParams() {
 export default function SignUpPage() {
   return (
     <div className="min-h-screen bg-background grid-bg flex flex-col items-center justify-center px-4 py-12">
-      <Link href="/" className="flex items-center gap-2 mb-8">
-        <MyChatLogo size={28} />
-        <span className="font-display uppercase tracking-[0.25em] text-sm">MyChat</span>
+      {/* Logo back to home */}
+      <Link href="/" className="flex items-center gap-2.5 mb-10 group">
+        <MyChatLogo size={32} />
+        <span className="font-bold text-xl tracking-tight">
+          <span className="text-foreground">My</span>
+          <span className="text-brand-gradient">Chat</span>
+        </span>
       </Link>
+
       <div className="w-full max-w-md">
-        <div className="text-center mb-6">
-          <div className="text-[10px] uppercase tracking-[0.3em] text-primary">
-            {'// New Operator Registration'}
-          </div>
-          <h1 className="mt-2 font-display text-2xl uppercase tracking-tight">
-            Request Clearance
+        <div className="text-center mb-8">
+          <h1 className="font-bold text-2xl sm:text-3xl text-foreground tracking-tight">
+            Create your account
           </h1>
+          <p className="mt-2 text-sm text-muted-foreground">
+            Join MyChat and start chatting with AI instantly
+          </p>
         </div>
         <SignUp
           routing="hash"
@@ -34,7 +39,15 @@ export default function SignUpPage() {
           fallbackRedirectUrl="/chat"
           appearance={{
             elements: {
-              devModeBadge: 'hidden',
+              devModeBadge: 'hidden !important',
+              card: '!bg-surface !border-border shadow-2xl shadow-brand-blue/10',
+              formButtonPrimary: 'bg-brand-gradient hover:brightness-110 text-white font-semibold min-h-[44px]',
+              formFieldInput: '!bg-input !border-border text-foreground !text-base focus:!border-brand-blue',
+              headerTitle: 'hidden',
+              headerSubtitle: 'hidden',
+              socialButtonsBlockButton: '!bg-surface !border-border hover:!bg-muted min-h-[44px]',
+              footerActionLink: '!text-brand-blue hover:!text-brand-purple',
+              footer: '!hidden',
             },
           }}
         />

@@ -4,10 +4,15 @@
   "description": "MyChat is your personal AI assistant — clean, fast, intelligent.",
   "start_url": "/chat",
   "display": "standalone",
-  "background_color": "#0A0E12",
-  "theme_color": "#0A0E12",
+  "background_color": "#0A0E17",
+  "theme_color": "#2E6FF6",
   "orientation": "portrait-primary",
   "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "any",
+      "type": "image/x-icon"
+    },
     {
       "src": "/icons/icon-192.png",
       "sizes": "192x192",

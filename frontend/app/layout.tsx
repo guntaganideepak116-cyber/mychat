@@ -55,11 +55,11 @@ export const metadata: Metadata = {
 };
 
 export const viewport = {
-  themeColor: '#0A0E12',
+  themeColor: '#2E6FF6',
   width: 'device-width',
   initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
+  maximumScale: 5,
+  userScalable: true,
   viewportFit: 'cover',
 };
 

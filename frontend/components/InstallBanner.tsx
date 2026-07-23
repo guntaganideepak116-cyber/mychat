@@ -95,43 +95,50 @@ export function InstallBanner() {
 
   return (
     <div
-      className="sticky top-0 z-50 w-full border-b border-primary/30 bg-background/95 backdrop-blur"
+      className="sticky top-0 z-50 w-full border-b border-brand-blue/25 bg-background/95 backdrop-blur"
       style={{ paddingTop: 'var(--safe-top)' }}
       role="region"
       aria-label="Install MyChat"
     >
       <div className="mx-auto flex max-w-6xl items-center gap-3 px-3 py-2 sm:px-4">
-        <div className="grid h-9 w-9 shrink-0 place-items-center rounded-md bg-primary/10">
+        {/* App icon */}
+        <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-brand-blue/10 border border-brand-blue/20">
           <MyChatLogo size={22} />
         </div>
+
+        {/* Text content — truncates on 320px */}
         <div className="min-w-0 flex-1">
-          <p className="truncate text-xs font-medium text-foreground sm:text-sm">
-            {iosMode ? 'Install MyChat' : 'Install MyChat for the full experience'}
+          <p className="truncate text-sm font-semibold text-foreground">
+            {iosMode ? 'Install MyChat' : 'Install MyChat for the best experience'}
           </p>
-          <p className="truncate text-[11px] text-muted-foreground sm:text-xs">
+          <p className="truncate text-xs text-muted-foreground mt-0.5">
             {iosMode ? (
               <>
                 Tap <Share className="inline h-3 w-3 align-[-2px]" /> then{' '}
-                <span className="text-foreground">Add to Home Screen</span>
+                <span className="text-foreground font-medium">Add to Home Screen</span>
               </>
             ) : (
-              'One tap. Launches like a native app.'
+              'One tap · Launches like a native app · Works offline'
             )}
           </p>
         </div>
+
+        {/* Install button — 44px min tap target */}
         {!iosMode && (
           <button
             onClick={handleInstall}
-            className="inline-flex h-9 shrink-0 items-center gap-1.5 rounded-md bg-primary px-3 text-xs font-semibold text-primary-foreground transition hover:brightness-110"
+            className="inline-flex h-11 shrink-0 items-center gap-1.5 rounded-lg bg-brand-gradient px-4 text-xs font-semibold text-white transition hover:brightness-110 active:scale-[0.97] whitespace-nowrap"
           >
-            <Download className="h-3.5 w-3.5" />
+            <Download className="h-3.5 w-3.5 shrink-0" />
             Install
           </button>
         )}
+
+        {/* Dismiss button — 44×44px minimum */}
         <button
           onClick={handleDismiss}
-          className="grid h-9 w-9 shrink-0 place-items-center rounded-md text-muted-foreground hover:bg-muted hover:text-foreground"
-          aria-label="Dismiss"
+          className="grid h-11 w-11 shrink-0 place-items-center rounded-lg text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
+          aria-label="Dismiss install banner"
         >
           <X className="h-4 w-4" />
         </button>

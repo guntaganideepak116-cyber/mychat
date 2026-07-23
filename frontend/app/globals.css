@@ -2,84 +2,114 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ── Safe-area insets (notches, home indicator, status bar) ── */
+/* ─────────────────────────────────────────────────────────
+   BRAND COLOR SYSTEM
+   Primary gradient: #2E6FF6 → #9333EA (135deg)
+───────────────────────────────────────────────────────── */
 :root {
+  /* Brand palette */
+  --brand-blue: #2E6FF6;
+  --brand-purple: #9333EA;
+  --brand-gradient: linear-gradient(135deg, #2E6FF6 0%, #9333EA 100%);
+
+  /* Text */
+  --text-dark: #0F172A;
+  --text-gray: #6B7280;
+
+  /* Semantic */
+  --success: #10B981;
+  --error: #EF4444;
+  --warning: #F59E0B;
+
+  /* Border radius */
   --radius: 0.75rem;
+
+  /* Safe-area insets (notches, home indicator, status bar) */
   --safe-top: env(safe-area-inset-top, 0px);
   --safe-bottom: env(safe-area-inset-bottom, 0px);
   --safe-left: env(safe-area-inset-left, 0px);
   --safe-right: env(safe-area-inset-right, 0px);
 
-  /* ── Modern SaaS Dark Theme (Default) ── */
-  --background: hsl(240 10% 8%);
-  --foreground: hsl(240 10% 98%);
-  --surface: hsl(240 10% 12%);
-  --surface-elevated: hsl(240 10% 16%);
-  --card: hsl(240 10% 12%);
-  --card-foreground: hsl(240 10% 98%);
-  --popover: hsl(240 10% 12%);
-  --popover-foreground: hsl(240 10% 98%);
+  /* ── Dark Theme (Default) ── */
+  --background: #0A0E17;
+  --foreground: #F1F5F9;
+  --surface: #151B29;
+  --surface-elevated: #1E2640;
+  --card: #151B29;
+  --card-foreground: #F1F5F9;
+  --popover: #151B29;
+  --popover-foreground: #F1F5F9;
 
-  /* Primary Accent: Indigo (#6366F1) */
-  --primary: hsl(239 84% 67%);
-  --primary-foreground: hsl(0 0% 100%);
+  /* Primary = brand-blue */
+  --primary: #2E6FF6;
+  --primary-foreground: #FFFFFF;
 
-  --secondary: hsl(240 10% 18%);
-  --secondary-foreground: hsl(240 10% 95%);
-  --muted: hsl(240 10% 18%);
-  --muted-foreground: hsl(240 10% 70%);
-  --accent: hsl(239 84% 67%);
-  --accent-foreground: hsl(0 0% 100%);
-  --destructive: hsl(0 84% 60%);
-  --destructive-foreground: hsl(0 0% 98%);
-  --border: hsl(240 10% 20%);
-  --input: hsl(240 10% 20%);
-  --ring: hsl(239 84% 67%);
+  --secondary: #1E2640;
+  --secondary-foreground: #CBD5E1;
+  --muted: #1E2640;
+  --muted-foreground: #64748B;
+  --accent: #2E6FF6;
+  --accent-foreground: #FFFFFF;
+  --destructive: #EF4444;
+  --destructive-foreground: #FFFFFF;
+  --alert: #F59E0B;
+  --border: #232B3D;
+  --input: #232B3D;
+  --ring: #2E6FF6;
 }
 
+/* ── Light Theme ── */
 .light {
-  /* ── Modern SaaS Light Theme ── */
-  --background: hsl(0 0% 100%);
-  --foreground: hsl(240 10% 10%);
-  --surface: hsl(240 10% 97%);
-  --surface-elevated: hsl(0 0% 100%);
-  --card: hsl(0 0% 100%);
-  --card-foreground: hsl(240 10% 10%);
-  --popover: hsl(0 0% 100%);
-  --popover-foreground: hsl(240 10% 10%);
+  --background: #FFFFFF;
+  --foreground: #0F172A;
+  --surface: #F8FAFC;
+  --surface-elevated: #FFFFFF;
+  --card: #FFFFFF;
+  --card-foreground: #0F172A;
+  --popover: #FFFFFF;
+  --popover-foreground: #0F172A;
 
-  --primary: hsl(239 84% 59%);
-  --primary-foreground: hsl(0 0% 100%);
+  --primary: #2E6FF6;
+  --primary-foreground: #FFFFFF;
 
-  --secondary: hsl(240 10% 96%);
-  --secondary-foreground: hsl(240 10% 15%);
-  --muted: hsl(240 10% 96%);
-  --muted-foreground: hsl(240 10% 45%);
-  --accent: hsl(239 84% 59%);
-  --accent-foreground: hsl(0 0% 100%);
-  --destructive: hsl(0 84% 60%);
-  --destructive-foreground: hsl(0 0% 98%);
-  --border: hsl(240 10% 90%);
-  --input: hsl(240 10% 90%);
-  --ring: hsl(239 84% 59%);
+  --secondary: #F1F5F9;
+  --secondary-foreground: #0F172A;
+  --muted: #F1F5F9;
+  --muted-foreground: #6B7280;
+  --accent: #2E6FF6;
+  --accent-foreground: #FFFFFF;
+  --destructive: #EF4444;
+  --destructive-foreground: #FFFFFF;
+  --alert: #F59E0B;
+  --border: #E2E8F0;
+  --input: #E2E8F0;
+  --ring: #2E6FF6;
 }
 
 /* ── Hide Clerk Development Mode Badge & Branding Footers ── */
 .cl-devModeBadge,
 .cl-internal-dev-mode-badge,
 .cl-footerAction,
+.cl-footer,
 [class*="devModeBadge"],
-[class*="internal-dev-mode-badge"] {
+[class*="internal-dev-mode-badge"],
+[data-localization-key="unstable__errors.form_identifier_not_found"] ~ *,
+#cl-dev-mode-warning {
   display: none !important;
 }
 
 /* ── Base Reset & Typography ── */
-* {
+*,
+*::before,
+*::after {
   border-color: var(--border);
+  box-sizing: border-box;
 }
 
 html {
   scroll-behavior: smooth;
+  /* Prevent horizontal overflow at any breakpoint */
+  overflow-x: hidden;
 }
 
 body {
@@ -87,41 +117,88 @@ body {
   color: var(--foreground);
   font-family: var(--next-font-inter), 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   scrollbar-width: thin;
-  scrollbar-color: rgba(148, 163, 184, 0.2) transparent;
+  scrollbar-color: rgba(46, 111, 246, 0.2) transparent;
+  /* Prevent horizontal overflow */
+  overflow-x: hidden;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1, h2, h3, h4, h5, h6 {
   font-family: var(--next-font-inter), 'Inter', ui-sans-serif, system-ui, sans-serif;
   letter-spacing: -0.025em;
 }
 
-/* ── Glow & Gradient Utilities ── */
-.glow-indigo {
-  box-shadow:
-    0 0 0 1px rgba(99, 102, 241, 0.3),
-    0 8px 30px rgba(99, 102, 241, 0.25);
+/* ── CRITICAL: Prevent iOS auto-zoom on input focus (font-size < 16px) ── */
+input,
+select,
+textarea {
+  font-size: max(16px, 1rem);
 }
 
-.text-gradient {
-  background: linear-gradient(135deg, var(--foreground) 30%, rgba(99, 102, 241, 0.9) 100%);
+/* ─────────────────────────────────────────────────────────
+   BRAND GRADIENT UTILITIES
+───────────────────────────────────────────────────────── */
+
+/* Gradient background utility */
+.brand-gradient {
+  background: var(--brand-gradient);
+}
+
+/* Gradient text utility */
+.text-brand-gradient {
+  background: var(--brand-gradient);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* Legacy text-gradient (updated to brand) */
+.text-gradient {
+  background: var(--brand-gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* ── Glow Utilities ── */
+.glow-brand {
+  box-shadow:
+    0 0 0 1px rgba(46, 111, 246, 0.3),
+    0 8px 30px rgba(46, 111, 246, 0.2);
+}
+
+/* Legacy alias */
+.glow-indigo {
+  box-shadow:
+    0 0 0 1px rgba(46, 111, 246, 0.3),
+    0 8px 30px rgba(46, 111, 246, 0.2);
+}
+
+.glow-cyan {
+  box-shadow:
+    0 0 0 1px rgba(46, 111, 246, 0.35),
+    0 4px 20px rgba(46, 111, 246, 0.2);
 }
 
 /* ── Subtle Background Patterns ── */
 .dot-grid {
-  background-image: radial-gradient(rgba(148, 163, 184, 0.15) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(46, 111, 246, 0.12) 1px, transparent 1px);
   background-size: 24px 24px;
 }
 
-/* ── Typing Dots Animation ── */
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(46, 111, 246, 0.05) 1px, transparent 1px),
+    linear-gradient(to right, rgba(46, 111, 246, 0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* ─────────────────────────────────────────────────────────
+   TYPING DOTS ANIMATION (Brand blue → purple cycle)
+───────────────────────────────────────────────────────── */
 @keyframes typing-dot {
   0%, 80%, 100% {
     transform: scale(0.6);
@@ -135,15 +212,20 @@ h6 {
 
 .animate-typing-1 {
   animation: typing-dot 1.4s infinite ease-in-out 0s;
+  background-color: var(--brand-blue);
 }
 .animate-typing-2 {
   animation: typing-dot 1.4s infinite ease-in-out 0.2s;
+  background-color: color-mix(in srgb, var(--brand-blue) 50%, var(--brand-purple) 50%);
 }
 .animate-typing-3 {
   animation: typing-dot 1.4s infinite ease-in-out 0.4s;
+  background-color: var(--brand-purple);
 }
 
-/* ── Custom Scrollbar (WebKit Fallback) ── */
+/* ─────────────────────────────────────────────────────────
+   CUSTOM SCROLLBAR
+───────────────────────────────────────────────────────── */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -152,9 +234,31 @@ h6 {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(148, 163, 184, 0.2);
+  background: rgba(46, 111, 246, 0.18);
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(99, 102, 241, 0.5);
+  background: rgba(46, 111, 246, 0.4);
+}
+
+/* ─────────────────────────────────────────────────────────
+   MOBILE RESPONSIVENESS HELPERS
+───────────────────────────────────────────────────────── */
+
+/* Ensure all images don't overflow their containers */
+img, video, svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Code blocks inside chat are scrollable horizontally */
+.chat-code-block {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Min tap-target size (44×44px WCAG 2.5.5) */
+.tap-target {
+  min-height: 44px;
+  min-width: 44px;
 }

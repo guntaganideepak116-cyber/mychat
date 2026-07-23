@@ -25,7 +25,7 @@ export default function ChatPage() {
   const clerkEnabled = !!process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
 
   return (
-    <div className="h-dvh w-full flex bg-background text-foreground overflow-hidden">
+    <div className="h-dvh w-full flex bg-background text-foreground overflow-hidden transition-colors duration-300">
       {/* Desktop sidebar */}
       <div className="hidden md:flex w-72 shrink-0 h-full">
         <Sidebar
@@ -45,7 +45,7 @@ export default function ChatPage() {
       {/* Mobile drawer */}
       <div
         className={cn(
-          'md:hidden fixed inset-0 z-40 transition-opacity',
+          'md:hidden fixed inset-0 z-40 transition-opacity duration-300',
           sidebarOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none',
         )}
       >
@@ -55,7 +55,7 @@ export default function ChatPage() {
         />
         <div
           className={cn(
-            'absolute left-0 top-0 h-full w-72 transition-transform',
+            'absolute left-0 top-0 h-full w-[min(288px,85vw)] transition-transform duration-300 ease-out shadow-2xl',
             sidebarOpen ? 'translate-x-0' : '-translate-x-full',
           )}
         >

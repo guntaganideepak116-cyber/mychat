@@ -16,23 +16,30 @@ interface Props {
 export function ChatInput({ value, onChange, onSubmit, onStop, streaming, disabled }: Props) {
   const ref = useRef<HTMLTextAreaElement>(null);
 
+  // Auto-resize textarea up to ~6 lines
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
     el.style.height = 'auto';
-    const max = 24 * 6 + 24; // ~6 lines
-    el.style.height = Math.min(el.scrollHeight, max) + 'px';
+    const maxHeight = 24 * 6 + 32; // ~6 lines
+    el.style.height = Math.min(el.scrollHeight, maxHeight) + 'px';
   }, [value]);
 
   const canSend = value.trim().length > 0 && !streaming && !disabled;
 
   return (
     <div
-      className="border-t border-border bg-background/80 backdrop-blur px-3 sm:px-6 py-3"
+      className="border-t border-border bg-background/90 backdrop-blur-md px-3 sm:px-6 py-3 shrink-0"
       style={{ paddingBottom: 'calc(0.75rem + var(--safe-bottom))' }}
     >
       <div className="mx-auto max-w-3xl">
-        <div className="relative flex items-end gap-2 rounded-lg border border-border bg-surface focus-within:border-primary/60 focus-within:glow-cyan transition-colors">
+        <div
+          className={cn(
+            'relative flex items-end gap-2 rounded-xl border bg-surface transition-all duration-200',
+            'focus-within:border-brand-blue/60 focus-within:shadow-[0_0_0_3px_rgba(46,111,246,0.12)]',
+            'border-border',
+          )}
+        >
           <textarea
             ref={ref}
             value={value}
@@ -44,15 +51,25 @@ export function ChatInput({ value, onChange, onSubmit, onStop, streaming, disabl
               }
             }}
             rows={1}
-            placeholder="Transmit your query..."
-            className="flex-1 resize-none bg-transparent px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none max-h-[168px]"
+            placeholder="Ask me anything…"
+            disabled={disabled}
+            aria-label="Message input"
+            className={cn(
+              'flex-1 resize-none bg-transparent px-4 py-3.5 text-foreground placeholder:text-muted-foreground',
+              'focus:outline-none max-h-[168px] leading-relaxed',
+              // CRITICAL: 16px+ font-size prevents iOS Safari auto-zoom on focus
+              'text-base sm:text-sm',
+              disabled && 'opacity-50 cursor-not-allowed',
+            )}
           />
-          <div className="p-2">
+
+          {/* Send / Stop button — 44×44px minimum tap target */}
+          <div className="p-2 shrink-0">
             {streaming ? (
               <button
                 type="button"
                 onClick={onStop}
-                className="grid h-9 w-9 place-items-center rounded-md bg-destructive/20 text-destructive hover:bg-destructive/30 transition-colors"
+                className="grid h-11 w-11 place-items-center rounded-lg bg-destructive/15 text-destructive hover:bg-destructive/25 transition-colors"
                 aria-label="Stop generating"
               >
                 <Square className="h-4 w-4" fill="currentColor" />
@@ -63,20 +80,21 @@ export function ChatInput({ value, onChange, onSubmit, onStop, streaming, disabl
                 onClick={onSubmit}
                 disabled={!canSend}
                 className={cn(
-                  'grid h-9 w-9 place-items-center rounded-md transition-all',
+                  'grid h-11 w-11 place-items-center rounded-lg transition-all duration-200',
                   canSend
-                    ? 'bg-primary text-primary-foreground hover:brightness-110 glow-cyan'
-                    : 'bg-muted text-muted-foreground cursor-not-allowed',
+                    ? 'bg-brand-gradient text-white hover:brightness-110 hover:scale-105 active:scale-95 shadow-md shadow-brand-blue/25'
+                    : 'bg-muted text-muted-foreground cursor-not-allowed opacity-50',
                 )}
-                aria-label="Send"
+                aria-label="Send message"
               >
                 <ArrowUp className="h-4 w-4" />
               </button>
             )}
           </div>
         </div>
-        <p className="mt-2 text-center text-[11px] uppercase tracking-wider text-muted-foreground">
-          MyChat can make mistakes. Verify important info.
+
+        <p className="mt-2 text-center text-[11px] text-muted-foreground/70">
+          MyChat can make mistakes. Verify important information.
         </p>
       </div>
     </div>
