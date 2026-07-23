@@ -7,6 +7,10 @@ export const metadata: Metadata = {
   title: 'Sign In — MyChat',
 };
 
+export function generateStaticParams() {
+  return [{ 'sign-in': [] }];
+}
+
 export default function SignInPage() {
   return (
     <div className="min-h-screen bg-background grid-bg flex flex-col items-center justify-center px-4 py-12">
