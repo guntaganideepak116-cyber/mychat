@@ -1,0 +1,151 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Safe-area insets (notches, home indicator, status bar) ── */
+:root {
+  --radius: 0.75rem;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+
+  /* ── Modern SaaS Dark Theme (Default) ── */
+  --background: hsl(240 10% 8%);
+  --foreground: hsl(240 10% 98%);
+  --surface: hsl(240 10% 12%);
+  --surface-elevated: hsl(240 10% 16%);
+  --card: hsl(240 10% 12%);
+  --card-foreground: hsl(240 10% 98%);
+  --popover: hsl(240 10% 12%);
+  --popover-foreground: hsl(240 10% 98%);
+
+  /* Primary Accent: Indigo (#6366F1) */
+  --primary: hsl(239 84% 67%);
+  --primary-foreground: hsl(0 0% 100%);
+
+  --secondary: hsl(240 10% 18%);
+  --secondary-foreground: hsl(240 10% 95%);
+  --muted: hsl(240 10% 18%);
+  --muted-foreground: hsl(240 10% 70%);
+  --accent: hsl(239 84% 67%);
+  --accent-foreground: hsl(0 0% 100%);
+  --destructive: hsl(0 84% 60%);
+  --destructive-foreground: hsl(0 0% 98%);
+  --border: hsl(240 10% 20%);
+  --input: hsl(240 10% 20%);
+  --ring: hsl(239 84% 67%);
+}
+
+.light {
+  /* ── Modern SaaS Light Theme ── */
+  --background: hsl(0 0% 100%);
+  --foreground: hsl(240 10% 10%);
+  --surface: hsl(240 10% 97%);
+  --surface-elevated: hsl(0 0% 100%);
+  --card: hsl(0 0% 100%);
+  --card-foreground: hsl(240 10% 10%);
+  --popover: hsl(0 0% 100%);
+  --popover-foreground: hsl(0 0% 100%);
+
+  --primary: hsl(239 84% 59%);
+  --primary-foreground: hsl(0 0% 100%);
+
+  --secondary: hsl(240 10% 96%);
+  --secondary-foreground: hsl(240 10% 15%);
+  --muted: hsl(240 10% 96%);
+  --muted-foreground: hsl(240 10% 45%);
+  --accent: hsl(239 84% 59%);
+  --accent-foreground: hsl(0 0% 100%);
+  --destructive: hsl(0 84% 60%);
+  --destructive-foreground: hsl(0 0% 98%);
+  --border: hsl(240 10% 90%);
+  --input: hsl(240 10% 90%);
+  --ring: hsl(239 84% 59%);
+}
+
+/* ── Base Reset & Typography ── */
+* {
+  border-color: var(--border);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--next-font-inter), 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(148, 163, 184, 0.2) transparent;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--next-font-inter), 'Inter', ui-sans-serif, system-ui, sans-serif;
+  letter-spacing: -0.025em;
+}
+
+/* ── Glow & Gradient Utilities ── */
+.glow-indigo {
+  box-shadow:
+    0 0 0 1px rgba(99, 102, 241, 0.3),
+    0 8px 30px rgba(99, 102, 241, 0.25);
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, var(--foreground) 30%, rgba(99, 102, 241, 0.9) 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ── Subtle Background Patterns ── */
+.dot-grid {
+  background-image: radial-gradient(rgba(148, 163, 184, 0.15) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* ── Typing Dots Animation ── */
+@keyframes typing-dot {
+  0%, 80%, 100% {
+    transform: scale(0.6);
+    opacity: 0.4;
+  }
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-typing-1 {
+  animation: typing-dot 1.4s infinite ease-in-out 0s;
+}
+.animate-typing-2 {
+  animation: typing-dot 1.4s infinite ease-in-out 0.2s;
+}
+.animate-typing-3 {
+  animation: typing-dot 1.4s infinite ease-in-out 0.4s;
+}
+
+/* ── Custom Scrollbar (WebKit Fallback) ── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.2);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(99, 102, 241, 0.5);
+}

@@ -1,0 +1,14 @@
+{
+  "name": "mychat-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Monorepo for MyChat AI Assistant",
+  "scripts": {
+    "dev": "concurrently \"npm run dev --prefix frontend\" \"npm run dev --prefix backend\"",
+    "build:frontend": "npm run build --prefix frontend",
+    "build:backend": "npm run build --prefix backend"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
