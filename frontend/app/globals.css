@@ -41,6 +41,18 @@
   .border-brand-purple { border-color: #9333EA; }
   .ring-brand-blue { --tw-ring-color: #2E6FF6; }
 
+  /* Semantic colors */
+  .bg-success { background-color: #10B981; }
+  .text-success { color: #10B981; }
+  .bg-error { background-color: #EF4444; }
+  .text-error { color: #EF4444; }
+  .bg-warning { background-color: #F59E0B; }
+  .text-warning { color: #F59E0B; }
+  .fill-current { fill: currentColor; }
+
+  /* Word break utility for long URLs in chat */
+  .overflow-wrap-anywhere { overflow-wrap: anywhere; }
+
   /* Brand blue opacity variants */
   .bg-brand-blue\/10 { background-color: rgba(46,111,246,0.10); }
   .bg-brand-blue\/12 { background-color: rgba(46,111,246,0.12); }

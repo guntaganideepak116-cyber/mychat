@@ -64,39 +64,41 @@ export default function LandingPage() {
       <header className="sticky top-0 z-50 w-full border-b border-border/50 bg-background/80 backdrop-blur-md transition-colors">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
           {/* Logo + wordmark */}
-          <Link href="/" className="flex items-center gap-2.5 group min-w-0 shrink-0">
-            <MyChatLogo size={30} />
-            <span className="font-bold text-lg tracking-tight">
+          <Link href="/" className="flex items-center gap-2 group shrink-0">
+            <MyChatLogo size={28} />
+            <span className="font-bold text-base sm:text-lg tracking-tight whitespace-nowrap">
               <span className="text-foreground">My</span>
               <span className="text-brand-gradient">Chat</span>
             </span>
           </Link>
 
-          {/* Nav actions — always visible, compact on mobile */}
-          <div className="flex items-center gap-2 sm:gap-3">
+          {/* Nav actions */}
+          <div className="flex items-center gap-1.5 sm:gap-3">
             {/* Theme Toggle — 44px tap target */}
             <button
               onClick={toggleTheme}
-              className="flex h-11 w-11 items-center justify-center rounded-lg border border-border/60 bg-surface hover:bg-muted text-muted-foreground hover:text-foreground transition-all"
+              className="flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-lg border border-border/60 bg-surface hover:bg-muted text-muted-foreground hover:text-foreground transition-all shrink-0"
               aria-label="Toggle theme"
               title="Toggle Light/Dark Mode"
             >
               {isLightMode ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
             </button>
 
+            {/* Sign In — hidden on mobile to save space */}
             <Link
               href="/sign-in"
-              className="flex h-11 items-center text-sm font-medium text-muted-foreground hover:text-foreground transition-colors px-2"
+              className="hidden sm:flex h-10 items-center text-sm font-medium text-muted-foreground hover:text-foreground transition-colors px-2 whitespace-nowrap"
             >
               Sign In
             </Link>
 
+            {/* Get Started — always visible, no text wrap */}
             <Link
               href="/sign-up"
-              className="inline-flex h-11 items-center justify-center gap-1.5 rounded-lg bg-brand-gradient px-4 sm:px-5 text-sm font-semibold text-white shadow-sm hover:brightness-110 transition-all active:scale-[0.98]"
+              className="inline-flex h-10 sm:h-11 items-center justify-center gap-1 sm:gap-1.5 rounded-lg bg-brand-gradient px-3 sm:px-5 text-xs sm:text-sm font-semibold text-white shadow-sm hover:brightness-110 transition-all active:scale-[0.98] whitespace-nowrap shrink-0"
             >
               Get Started
-              <ArrowRight className="h-4 w-4 shrink-0" />
+              <ArrowRight className="h-3.5 w-3.5 sm:h-4 sm:w-4 shrink-0" />
             </Link>
           </div>
         </div>
