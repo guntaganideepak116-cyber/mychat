@@ -13,8 +13,16 @@ function initFirebase(): Firestore {
     const rawPrivateKey = process.env.FIREBASE_PRIVATE_KEY;
 
     if (projectId && clientEmail && rawPrivateKey) {
-      // Unescape newlines in private key if passed as single-line string
-      const privateKey = rawPrivateKey.replace(/\\n/g, '\n');
+      // Unescape newlines and strip surrounding quotes if passed in cloud envs
+      let privateKey = rawPrivateKey.trim();
+      if (
+        (privateKey.startsWith('"') && privateKey.endsWith('"')) ||
+        (privateKey.startsWith("'") && privateKey.endsWith("'"))
+      ) {
+        privateKey = privateKey.slice(1, -1);
+      }
+      privateKey = privateKey.replace(/\\n/g, '\n');
+
       initializeApp({
         credential: cert({
           projectId,
