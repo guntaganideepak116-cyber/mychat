@@ -1,14 +1,12 @@
 /**
- * Clerk configuration.
- * Env var renamed from VITE_CLERK_PUBLISHABLE_KEY → NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY.
- * NEXT_PUBLIC_ prefix is required for the value to be available in the browser bundle.
+ * Clerk configuration and styling theme.
  */
 export const CLERK_PUBLISHABLE_KEY =
   process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY as string | undefined;
 
 export const clerkAppearance = {
   variables: {
-    colorPrimary: '#00D9C0',
+    colorPrimary: '#6366F1',
     colorBackground: '#141a20',
     colorInputBackground: '#1a2128',
     colorInputText: '#e8f4f2',
@@ -31,5 +29,8 @@ export const clerkAppearance = {
     identityPreviewEditButton: 'text-primary',
     dividerLine: 'bg-border',
     dividerText: 'text-muted-foreground',
+    devModeBadge: 'hidden !important',
+    internalDevModeBadge: 'hidden !important',
+    footer: 'hidden !important',
   },
 } as const;

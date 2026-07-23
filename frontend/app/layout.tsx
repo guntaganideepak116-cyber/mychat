@@ -32,6 +32,11 @@ export const metadata: Metadata = {
   description:
     'MyChat is your personal AI assistant. Ask anything, get streamed, intelligent answers.',
   authors: [{ name: 'MyChat' }],
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+    apple: '/favicon.ico',
+  },
   manifest: '/manifest.webmanifest',
   appleWebApp: {
     capable: true,
@@ -83,10 +88,9 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="apple-mobile-web-app-title" content="MyChat" />
-        <link rel="icon" type="image/png" href="/favicon.png" />
-        <link rel="apple-touch-icon" href="/icons/icon-192.png" />
-        <link rel="apple-touch-icon" sizes="152x152" href="/icons/icon-152.png" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-180.png" />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="shortcut icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" href="/favicon.ico" />
       </head>
       <body>
         {clerkKey ? (
