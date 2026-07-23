@@ -13,7 +13,7 @@ dotenv.config();
 const app: Express = express();
 
 // ── 1. CORS Configuration ──────────────────────────────────────────────────
-const rawOrigins = process.env.FRONTEND_URL || 'http://localhost:3000,http://localhost:5173';
+const rawOrigins = process.env.FRONTEND_URL || '*';
 const allowedOrigins = rawOrigins
   .split(',')
   .map((o) => o.trim())
@@ -24,16 +24,26 @@ app.use(
     origin: (origin, callback) => {
       // Allow requests with no origin (like mobile apps, curl, Postman)
       if (!origin) return callback(null, true);
-      if (allowedOrigins.indexOf(origin) !== -1 || allowedOrigins.includes('*')) {
+      
+      if (
+        allowedOrigins.includes('*') ||
+        allowedOrigins.includes(origin) ||
+        origin.endsWith('.vercel.app') ||
+        origin.endsWith('.pages.dev') ||
+        origin.startsWith('http://localhost')
+      ) {
         return callback(null, true);
       }
-      callback(new Error(`CORS Error: Origin ${origin} is not allowed.`));
+      return callback(null, true);
     },
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
   }),
 );
+
+// Explicitly handle preflight OPTIONS requests for all routes
+app.options('*', cors());
 
 // ── 2. Body Parsing Middleware ──────────────────────────────────────────────
 app.use(express.json());
