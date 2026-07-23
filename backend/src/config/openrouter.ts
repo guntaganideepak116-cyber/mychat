@@ -16,4 +16,4 @@ export const openrouter = new OpenAI({
 });
 
 export const OPENROUTER_MODEL =
-  process.env.GROQ_MODEL || process.env.OPENROUTER_MODEL || 'llama-3.3-70b-versatile';
+  process.env.GROQ_MODEL || process.env.OPENROUTER_MODEL || 'llama-3.1-8b-instant';
